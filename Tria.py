@@ -127,29 +127,29 @@ def catch():
     "Presa delle palline."
     assez.setSpeed(Outmax)
     while True:
-    	if(inputdownz.state()==1):
-    		assez.setSpeed(Outmin)
-    		ventosa.setLevel(Outmax)
-    		break
-	assez.setSpeed(-Outmax)
+        if(inputdownz.state()==1):
+                assez.setSpeed(Outmin)
+                ventosa.setLevel(Outmax)
+                break
+        assez.setSpeed(-Outmax)
     while True:
-    	if(inputupz.state()==1):
-    		assez.setSpeed(Outmin)
-    		break
+        if(inputupz.state()==1):
+                assez.setSpeed(Outmin)
+                break
 
 def release():
     "Rilascio delle palline."
-	assez.setSpeed(Outmax)
+    assez.setSpeed(Outmax)
     while True:
-    	if(inputdownz.state()==1):
-    		assez.setSpeed(Outmin)
-    		ventosa.setLevel(Outmin)
-    		break
-	assez.setSpeed(-Outmax)
+        if(inputdownz.state()==1):
+                assez.setSpeed(Outmin)
+                ventosa.setLevel(Outmin)
+                break
+        assez.setSpeed(-Outmax)
     while True:
-    	if(inputupz.state()==1):
-    		assez.setSpeed(Outmin)
-    		break
+        if(inputupz.state()==1):
+                assez.setSpeed(Outmin)
+                break
 
 def fromto(x1,y1,x2,y2):
     "Spostamento da (x1, y1) a (x2, y2)."
@@ -319,7 +319,7 @@ def FPossibiliTria():
                     lamp.setLevel(0)
                     ValposUpdate()
 
-def ControlloAttacco:
+def ControlloAttacco():
     "Controllo possibili mosse fortunate"
     global Priorita
     for i in range(0,23):

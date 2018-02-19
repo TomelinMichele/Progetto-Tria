@@ -332,7 +332,7 @@ def FPossibiliTria():
                 PosSvolgiTria.append(PossibiliTria[i+1])
             if Valpos[PossibiliTria[i+2]] == 0:
                 PosSvolgiTria.append(PossibiliTria[i+2])
-    if Controllo == False:
+    if not Controllo:
         for i in range(0, 48, 3):
             if (Valpos[PossibiliTria[i]] +
                 Valpos[PossibiliTria[i+1]] +
@@ -438,7 +438,7 @@ def Controlli():
             lamp.setLevel(Outmin)
             ValposUpdate()
             LenPNU = len(PosPallineNuoveU)
-    while(stop == False):
+    while not stop:
         stop = True
         for i1, i2 in zip(ValposOld, Valpos):
             ContatorePos = ContatorePos+1

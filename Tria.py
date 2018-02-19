@@ -195,6 +195,7 @@ def fromto(x1, y1, x2, y2):
 
 def ValposReset():
     "Rilevamento somme blu posizioni fotocamera all'inizio."
+    global ValposOld
     for i in range(0, 50):
         frameCamera = txt.getCameraFrame()
         with open(CAM_IMAGE, 'wb') as f:
@@ -214,6 +215,7 @@ def ValposUpdate():
     "Riconoscimento palline blu."
     global ContatoreVPU
     global PosPallineNuoveU
+    global ValposOld
     PosPallineNuoveU = []
     ContatoreVPU += 1
     frameCamera = txt.getCameraFrame()

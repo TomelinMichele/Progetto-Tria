@@ -13,7 +13,6 @@ import ftrobopy
 import time
 import random
 import cv2
-import numpy as np
 import logging
 logging.basicConfig(level=logging.DEBUG)
 debug=logging.debug

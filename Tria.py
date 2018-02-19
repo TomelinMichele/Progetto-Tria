@@ -79,12 +79,15 @@ inputInizioR = txt.input(8)
 asse_y = txt.motor(1)
 asse_x = txt.motor(2)
 asse_z = txt.motor(3)
-PossibiliTria = [0, 1, 2, 3, 4, 5, 6, 7, 8,
-                 21, 22, 23, 18, 19, 20,
-                 15, 16, 17, 21, 9, 0, 18, 10, 3,
-                 15, 11, 6, 2, 14, 23, 5, 13, 20,
-                 8, 12, 17, 9, 10, 11, 16, 19, 22, 12, 13, 14,
-                 1, 4, 7]       # Combinazioni possibili delle trie
+
+# Combinazioni possibili delle trie
+TRIA = [0, 1, 2, 3, 4, 5, 6, 7, 8,
+        21, 22, 23, 18, 19, 20,
+        15, 16, 17, 21, 9, 0, 18, 10, 3,
+        15, 11, 6, 2, 14, 23, 5, 13, 20,
+        8, 12, 17, 9, 10, 11, 16, 19, 22, 12, 13, 14,
+        1, 4, 7]
+
 CurrentX = 0                    # Coordinata X corrente
 CurrentY = 0                    # Coordinata Y corrente
 PosBloccoTriaU = []             # Posizione blocco tria utente
@@ -308,42 +311,42 @@ def FPossibiliTria():
     PosBloccoTriaU = []
     PosSvolgiTria = []
     for i in range(0, 48, 3):
-        if (VAL[PossibiliTria[i]] +
-            VAL[PossibiliTria[i+1]] +
-            VAL[PossibiliTria[i+2]]) == 20:
+        if (VAL[TRIA[i]] +
+            VAL[TRIA[i+1]] +
+            VAL[TRIA[i+2]]) == 20:
             Priorita = 2
-            if VAL[PossibiliTria[i]] == EMPTY:
-                PosBloccoTriaU.append(PossibiliTria[i])
-            elif VAL[PossibiliTria[i]] == ROBOT:
-                PosTogliPallina = PossibiliTria[i]
-            if VAL[PossibiliTria[i+1]] == EMPTY:
-                PosBloccoTriaU.append(PossibiliTria[i+1])
-            elif VAL[PossibiliTria[i+1]] == ROBOT:
-                PosTogliPallina = PossibiliTria[i+1]
-            if VAL[PossibiliTria[i+2]] == EMPTY:
-                PosBloccoTriaU.append(PossibiliTria[i+2])
-            elif VAL[PossibiliTria[i+2]] == ROBOT:
-                PosTogliPallina = PossibiliTria[i+2]
+            if VAL[TRIA[i]] == EMPTY:
+                PosBloccoTriaU.append(TRIA[i])
+            elif VAL[TRIA[i]] == ROBOT:
+                PosTogliPallina = TRIA[i]
+            if VAL[TRIA[i+1]] == EMPTY:
+                PosBloccoTriaU.append(TRIA[i+1])
+            elif VAL[TRIA[i+1]] == ROBOT:
+                PosTogliPallina = TRIA[i+1]
+            if VAL[TRIA[i+2]] == EMPTY:
+                PosBloccoTriaU.append(TRIA[i+2])
+            elif VAL[TRIA[i+2]] == ROBOT:
+                PosTogliPallina = TRIA[i+2]
 
     for i in range(0, 48, 3):
-        if (VAL[PossibiliTria[i]] +
-            VAL[PossibiliTria[i+1]] +
-            VAL[PossibiliTria[i+2]]) == 2:
+        if (VAL[TRIA[i]] +
+            VAL[TRIA[i+1]] +
+            VAL[TRIA[i+2]]) == 2:
             Priorita = 3
-            if VAL[PossibiliTria[i]] == EMPTY:
-                PosSvolgiTria.append(PossibiliTria[i])
-            if VAL[PossibiliTria[i+1]] == EMPTY:
-                PosSvolgiTria.append(PossibiliTria[i+1])
-            if VAL[PossibiliTria[i+2]] == EMPTY:
-                PosSvolgiTria.append(PossibiliTria[i+2])
+            if VAL[TRIA[i]] == EMPTY:
+                PosSvolgiTria.append(TRIA[i])
+            if VAL[TRIA[i+1]] == EMPTY:
+                PosSvolgiTria.append(TRIA[i+1])
+            if VAL[TRIA[i+2]] == EMPTY:
+                PosSvolgiTria.append(TRIA[i+2])
     if not Controllo:
         for i in range(0, 48, 3):
-            if (VAL[PossibiliTria[i]] +
-                VAL[PossibiliTria[i+1]] +
-                VAL[PossibiliTria[i+2]]) == 30:
-                if (ValposOld[PossibiliTria[i]] +
-                    ValposOld[PossibiliTria[i+1]] +
-                    ValposOld[PossibiliTria[i+2]]) != 30:
+            if (VAL[TRIA[i]] +
+                VAL[TRIA[i+1]] +
+                VAL[TRIA[i+2]]) == 30:
+                if (ValposOld[TRIA[i]] +
+                    ValposOld[TRIA[i+1]] +
+                    ValposOld[TRIA[i+2]]) != 30:
                     print("Hai formalizzato una Tria.")
                     print("Puoi eliminare una pallina avversaria!")
                     lamp.setLevel(256)

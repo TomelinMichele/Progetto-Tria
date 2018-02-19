@@ -32,7 +32,7 @@ CAM_IMAGE = 'img/TXTCamImg.jpg'
 
 WLAN = '192.168.8.2'
 USB = '192.168.7.2'
-txt = ftrobopy.ftrobopy(host=USB, port=65000)  # Connessione al controller
+txt = ftrobopy.ftrobopy(host=USB, port=65000) # Connessione al controller
 
 M = [txt.C_MOTOR, txt.C_MOTOR, txt.C_MOTOR, txt.C_OUTPUT]
 
@@ -58,11 +58,11 @@ ValposOld = [0] * 24
 
 # Coordinate X e Y dello scivolo su cui sono presenti le palline del Robot
 scivoloPalline = [5025, 4308]
-contenitorePVR = [0, 2903]     # Contenitore palline vinte robot
-contenitorePVU = [2635, 0]     # Contenitore palline vinte user
+contenitorePVR = [0, 2903]      # Contenitore palline vinte robot
+contenitorePVU = [2635, 0]      # Contenitore palline vinte user
 
-Outmax = 512  # Uscita massima pwm output
-Outmin = 0  # Uscita minima pwm output
+Outmax = 512                    # Uscita massima pwm output
+Outmin = 0                      # Uscita minima pwm output
 
 ventosa = txt.output(7)
 lamp = txt.output(8)
@@ -82,34 +82,34 @@ PossibiliTria = [0, 1, 2, 3, 4, 5, 6, 7, 8,
                  15, 16, 17, 21, 9, 0, 18, 10, 3,
                  15, 11, 6, 2, 14, 23, 5, 13, 20,
                  8, 12, 17, 9, 10, 11, 16, 19, 22, 12, 13, 14,
-                 1, 4, 7]  # Combinazioni possibili delle trie
-CurrentX = 0  # Coordinata X corrente
-CurrentY = 0  # Coordinata Y corrente
-PosBloccoTriaU = []  # Posizione blocco tria utente
-PosSvolgiTria = []  # Posizione completamento tria robot
-Priorita = 0  # Priorità mossa robot
+                 1, 4, 7]       # Combinazioni possibili delle trie
+CurrentX = 0                    # Coordinata X corrente
+CurrentY = 0                    # Coordinata Y corrente
+PosBloccoTriaU = []             # Posizione blocco tria utente
+PosSvolgiTria = []              # Posizione completamento tria robot
+Priorita = 0                    # Priorità mossa robot
 angoli = [0, 3, 6, 23, 20, 17, 21, 18, 15, 2, 5, 8]  # Posizioni angoli tria
 # Posizioni angoli quadrati tria
 quadrati = [0, 21, 23, 2, 3, 18, 20, 5, 6, 15, 17, 8]
 collegamenti = [9, 10, 11, 22, 19, 16, 14, 13,
-                12, 1, 4, 7]  # Posizioni collegamenti tria
-centroCollegamenti = [4, 10, 19, 13]  # Posizioni centro dei collegamenti tria
-AttaccoState = 0  # Stato strategia robot
-ContatoreVPU = 0  # Contatore Valpos Update
-PosPallineNuoveU = []  # Posizioni palline posizionate utente
-PosDifesa = 0  # Posizione difesa
-Controllo = False  # Boolean controllo
-PosAttacco = []  # Posizione attacco
-PosTogliPallina = []  # Posizione togli pallina
-ValposCamera = [0] * 24  # Valori posizioni fotocamera rilevamento somma blu
+                12, 1, 4, 7]         # Posizioni collegamenti tria
+centroCollegamenti = [4, 10, 19, 13] # Posizioni centro dei collegamenti tria
+AttaccoState = 0                     # Stato strategia robot
+ContatoreVPU = 0                     # Contatore Valpos Update
+PosPallineNuoveU = []           # Posizioni palline posizionate utente
+PosDifesa = 0                   # Posizione difesa
+Controllo = False               # Boolean controllo
+PosAttacco = []                 # Posizione attacco
+PosTogliPallina = []            # Posizione togli pallina
+ValposCamera = [0] * 24 # Valori posizioni fotocamera rilevamento somma blu
 XposIMG = [101, 156, 213, 121, 157, 195, 139, 157,
            178, 101, 122, 139, 179, 198, 217, 139,
-           160, 180, 121, 162, 200, 101, 160, 223]  # Coordinate X posizioni immagine fotocamera
+           160, 180, 121, 162, 200, 101, 160, 223] # Coordinate X posizioni immagine fotocamera
 YposIMG = [72, 70, 66, 87, 84, 83, 104, 104,
            103, 124, 124, 123, 121, 119, 118, 140,
-           140, 138, 161, 160, 156, 182, 180, 176]  # Coordinate Y posizioni immagine fotocamera
-User = False  # Boolean inizio utente
-Robot = False  # Boolean inizio robot
+           140, 138, 161, 160, 156, 182, 180, 176] # Coordinate Y posizioni immagine fotocamera
+User = False                    # Boolean inizio utente
+Robot = False                   # Boolean inizio robot
 
 #------------INIZIO FORMALIZZAZIONE CLASSI-----------------------------------------------------------------------------
 

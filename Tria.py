@@ -125,7 +125,7 @@ def reset():
 
 def catch():
     "Presa delle palline."
-	assez.setSpeed(Outmax)
+    assez.setSpeed(Outmax)
     while True:
     	if(inputdownz.state()==1):
     		assez.setSpeed(Outmin)

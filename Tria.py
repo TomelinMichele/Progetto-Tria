@@ -270,7 +270,7 @@ def Strategia():
         Valpos[V[3]] == EMPTY):
 
         N = random.choice(V)
-        while(Valpos[N] != EMPTY):
+        while Valpos[N] != EMPTY:
             N = random.choice(V)
         fromto(0, 0, scivoloPalline[0], scivoloPalline[1])
         catch()
@@ -421,7 +421,7 @@ def Controlli():
     stop = False
     ContatorePos = -1
     if LenPNU == 0 or LenPNU > 1:
-        while(LenPNU > 1):
+        while LenPNU > 1:
             for i in range(0, LenPNU):
                 Valpos[PosPallineNuoveU[i-1]] = EMPTY
             print("""\
@@ -433,7 +433,7 @@ def Controlli():
             lamp.setLevel(Outmin)
             ValposUpdate()
             LenPNU = len(PosPallineNuoveU)
-        while(LenPNU == 0):
+        while LenPNU == 0:
             print("""\
             MOSSA UTENTE NON VALIDA!!!
             NON HAI POSIZIONATO LA PALLINA!""")

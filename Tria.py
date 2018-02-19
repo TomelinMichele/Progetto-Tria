@@ -76,9 +76,9 @@ inputupz = txt.input(6)
 inputfinemossa = txt.input(7)
 inputInizioR = txt.input(8)
 
-assey = txt.motor(1)
-assex = txt.motor(2)
-assez = txt.motor(3)
+asse_y = txt.motor(1)
+asse_x = txt.motor(2)
+asse_z = txt.motor(3)
 PossibiliTria = [0, 1, 2, 3, 4, 5, 6, 7, 8,
                  21, 22, 23, 18, 19, 20,
                  15, 16, 17, 21, 9, 0, 18, 10, 3,
@@ -119,46 +119,46 @@ Robot = False                   # Boolean inizio robot
 
 def reset():
     "Reset del Robot nelle cordinate (0, 0)."
-    assex.setSpeed(-Outmax)
-    assey.setSpeed(Outmax)
-    assez.setSpeed(-Outmax)
+    asse_x.setSpeed(-Outmax)
+    asse_y.setSpeed(Outmax)
+    asse_z.setSpeed(-Outmax)
     while True:
         if (inputresetx.state() == 1 and
             inputresety.state() == 1 and
             inputupz.state() == 1):
-            assex.setSpeed(Outmin)
-            assey.setSpeed(Outmin)
-            assez.setSpeed(Outmin)
+            asse_x.setSpeed(Outmin)
+            asse_y.setSpeed(Outmin)
+            asse_z.setSpeed(Outmin)
             break
 
 
 def catch():
     "Presa delle palline."
-    assez.setSpeed(Outmax)
+    asse_z.setSpeed(Outmax)
     while True:
         if inputdownz.state() == 1:
-            assez.setSpeed(Outmin)
+            asse_z.setSpeed(Outmin)
             ventosa.setLevel(Outmax)
             break
-        assez.setSpeed(-Outmax)
+        asse_z.setSpeed(-Outmax)
     while True:
         if inputupz.state() == 1:
-            assez.setSpeed(Outmin)
+            asse_z.setSpeed(Outmin)
             break
 
 
 def release():
     "Rilascio delle palline."
-    assez.setSpeed(Outmax)
+    asse_z.setSpeed(Outmax)
     while True:
         if inputdownz.state() == 1:
-            assez.setSpeed(Outmin)
+            asse_z.setSpeed(Outmin)
             ventosa.setLevel(Outmin)
             break
-        assez.setSpeed(-Outmax)
+        asse_z.setSpeed(-Outmax)
     while True:
         if inputupz.state() == 1:
-            assez.setSpeed(Outmin)
+            asse_z.setSpeed(Outmin)
             break
 
 
@@ -174,19 +174,19 @@ def fromto(x1, y1, x2, y2):
     disty = abs(diffy)
     if diffx != 0:
         if diffx > 0:
-            assex.setSpeed(Outmax)
+            asse_x.setSpeed(Outmax)
         else:
-            assex.setSpeed(-Outmax)
-        assex.setDistance(distx)
+            asse_x.setSpeed(-Outmax)
+        asse_x.setDistance(distx)
 
     if diffy != 0:
         if diffy > 0:
-            assey.setSpeed(-Outmax)
+            asse_y.setSpeed(-Outmax)
         else:
-            assey.setSpeed(Outmax)
-        assey.setDistance(disty)
+            asse_y.setSpeed(Outmax)
+        asse_y.setDistance(disty)
 
-    while not(assey.finished() and assex.finished()):
+    while not(asse_y.finished() and asse_x.finished()):
         txt.updateWait()
 
 

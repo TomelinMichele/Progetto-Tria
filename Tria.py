@@ -69,12 +69,12 @@ Outmin = 0                      # Uscita minima pwm output
 ventosa = txt.output(7)
 lamp = txt.output(8)
 
-inputresety = txt.input(1)
-inputresetx = txt.input(4)
-inputdownz = txt.input(5)
-inputupz = txt.input(6)
-inputfinemossa = txt.input(7)
-inputInizioR = txt.input(8)
+input_resety = txt.input(1)
+input_resetx = txt.input(4)
+input_downz = txt.input(5)
+input_upz = txt.input(6)
+input_finemossa = txt.input(7)
+input_InizioR = txt.input(8)
 
 asse_y = txt.motor(1)
 asse_x = txt.motor(2)
@@ -126,9 +126,9 @@ def reset():
     asse_y.setSpeed(Outmax)
     asse_z.setSpeed(-Outmax)
     while True:
-        if (inputresetx.state() == 1 and
-            inputresety.state() == 1 and
-            inputupz.state() == 1):
+        if (input_resetx.state() == 1 and
+            input_resety.state() == 1 and
+            input_upz.state() == 1):
             asse_x.setSpeed(Outmin)
             asse_y.setSpeed(Outmin)
             asse_z.setSpeed(Outmin)
@@ -139,13 +139,13 @@ def catch():
     "Presa delle palline."
     asse_z.setSpeed(Outmax)
     while True:
-        if inputdownz.state() == 1:
+        if input_downz.state() == 1:
             asse_z.setSpeed(Outmin)
             ventosa.setLevel(Outmax)
             break
         asse_z.setSpeed(-Outmax)
     while True:
-        if inputupz.state() == 1:
+        if input_upz.state() == 1:
             asse_z.setSpeed(Outmin)
             break
 
@@ -154,13 +154,13 @@ def release():
     "Rilascio delle palline."
     asse_z.setSpeed(Outmax)
     while True:
-        if inputdownz.state() == 1:
+        if input_downz.state() == 1:
             asse_z.setSpeed(Outmin)
             ventosa.setLevel(Outmin)
             break
         asse_z.setSpeed(-Outmax)
     while True:
-        if inputupz.state() == 1:
+        if input_upz.state() == 1:
             asse_z.setSpeed(Outmin)
             break
 
@@ -256,7 +256,7 @@ def Lampeggio(seconds):
 def AttendUser():
     "Attend input fine mossa."
     while True:
-        if inputfinemossa.state() == 1:
+        if input_finemossa.state() == 1:
             break
 
 
@@ -541,10 +541,10 @@ User = False
 Robot = False
 
 while True:
-    if inputInizioR.state() == 1:
+    if input_InizioR.state() == 1:
         Robot = True
         break
-    if inputfinemossa.state() == 1:
+    if input_finemossa.state() == 1:
         User = True
         break
 

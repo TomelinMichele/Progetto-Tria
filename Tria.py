@@ -55,7 +55,7 @@ EMPTY = 0
 ROBOT = 1
 USER  = 10
 
-Valpos = [0] * 24
+VAL = [0] * 24
 ValposOld = [0] * 24
 
 # Coordinate X e Y dello scivolo su cui sono presenti le palline del Robot
@@ -204,7 +204,7 @@ def ValposReset():
                 b, _, _ = img[YposIMG[i] + k, XposIMG[i] + j]
                 blue = blue + b
         ValposCamera[i] = blue
-    ValposOld = Valpos
+    ValposOld = VAL
 
 
 def ValposUpdate():
@@ -218,7 +218,7 @@ def ValposUpdate():
         f.write(bytearray(frameCamera))
     img = cv2.imread(CAM_IMAGE, 1)
     if ContatoreVPU > 2:
-        ValposOld = Valpos
+        ValposOld = VAL
     for i in range(0, 24):
         blue = 0
         for j in range(0, 15):
@@ -226,14 +226,14 @@ def ValposUpdate():
                 b, _, _ = img[YposIMG[i] + k, XposIMG[i] + j]
                 blue = blue + b
         if blue - ValposCamera[i] > 3000:
-            if Valpos[i] == EMPTY:
-                Valpos[i] = USER
+            if VAL[i] == EMPTY:
+                VAL[i] = USER
                 PosPallineNuoveU.append(i)
                 print("pallina blu nella posizione "), i
         # if (blue - ValposCamera[i] > -1000) and
         #     blue - ValposCamera[i] < 1000):
-        #     if Valpos[i]==1:
-        #         Valpos[i]=0
+        #     if VAL[i]==1:
+        #         VAL[i]=0
         #         print("pallina Robot rimossa dalla posizione "),i
 
 
@@ -264,36 +264,36 @@ def Strategia():
     global PosSvolgiTria
     PosAttacco = []
     V = centroCollegamenti
-    if (Valpos[V[0]] == EMPTY or
-        Valpos[V[1]] == EMPTY or
-        Valpos[V[2]] == EMPTY or
-        Valpos[V[3]] == EMPTY):
+    if (VAL[V[0]] == EMPTY or
+        VAL[V[1]] == EMPTY or
+        VAL[V[2]] == EMPTY or
+        VAL[V[3]] == EMPTY):
 
         N = random.choice(V)
-        while Valpos[N] != EMPTY:
+        while VAL[N] != EMPTY:
             N = random.choice(V)
         fromto(0, 0, scivoloPalline[0], scivoloPalline[1])
         catch()
         fromto(scivoloPalline[0], scivoloPalline[1], Xpos[N], Ypos[N])
         release()
-        Valpos[N] = ROBOT
+        VAL[N] = ROBOT
     else:
         for i in quadrati:
             for j in collegamenti:
-                if Valpos[i] == EMPTY and Valpos[j] == EMPTY:
+                if VAL[i] == EMPTY and VAL[j] == EMPTY:
                     if j != V[0] and j != V[1] and j != V[2] and j != V[3]:
-                        Valpos[i] = ROBOT
-                        Valpos[j] = ROBOT
+                        VAL[i] = ROBOT
+                        VAL[j] = ROBOT
                         FPossibiliTria()
-                        Valpos[i] = EMPTY
-                        Valpos[j] = EMPTY
+                        VAL[i] = EMPTY
+                        VAL[j] = EMPTY
                         if len(PosSvolgiTria) > 1:
                             fromto(0, 0, scivoloPalline[0], scivoloPalline[1])
                             catch()
                             fromto(scivoloPalline[0], scivoloPalline[1],
                                    Xpos[i], Ypos[i])
                             release()
-                            Valpos[i] = ROBOT
+                            VAL[i] = ROBOT
                             PosAttacco = [j]
                             AttaccoState = 1
 
@@ -308,39 +308,39 @@ def FPossibiliTria():
     PosBloccoTriaU = []
     PosSvolgiTria = []
     for i in range(0, 48, 3):
-        if (Valpos[PossibiliTria[i]] +
-            Valpos[PossibiliTria[i+1]] +
-            Valpos[PossibiliTria[i+2]]) == 20:
+        if (VAL[PossibiliTria[i]] +
+            VAL[PossibiliTria[i+1]] +
+            VAL[PossibiliTria[i+2]]) == 20:
             Priorita = 2
-            if Valpos[PossibiliTria[i]] == EMPTY:
+            if VAL[PossibiliTria[i]] == EMPTY:
                 PosBloccoTriaU.append(PossibiliTria[i])
-            elif Valpos[PossibiliTria[i]] == ROBOT:
+            elif VAL[PossibiliTria[i]] == ROBOT:
                 PosTogliPallina = PossibiliTria[i]
-            if Valpos[PossibiliTria[i+1]] == EMPTY:
+            if VAL[PossibiliTria[i+1]] == EMPTY:
                 PosBloccoTriaU.append(PossibiliTria[i+1])
-            elif Valpos[PossibiliTria[i+1]] == ROBOT:
+            elif VAL[PossibiliTria[i+1]] == ROBOT:
                 PosTogliPallina = PossibiliTria[i+1]
-            if Valpos[PossibiliTria[i+2]] == EMPTY:
+            if VAL[PossibiliTria[i+2]] == EMPTY:
                 PosBloccoTriaU.append(PossibiliTria[i+2])
-            elif Valpos[PossibiliTria[i+2]] == ROBOT:
+            elif VAL[PossibiliTria[i+2]] == ROBOT:
                 PosTogliPallina = PossibiliTria[i+2]
 
     for i in range(0, 48, 3):
-        if (Valpos[PossibiliTria[i]] +
-            Valpos[PossibiliTria[i+1]] +
-            Valpos[PossibiliTria[i+2]]) == 2:
+        if (VAL[PossibiliTria[i]] +
+            VAL[PossibiliTria[i+1]] +
+            VAL[PossibiliTria[i+2]]) == 2:
             Priorita = 3
-            if Valpos[PossibiliTria[i]] == EMPTY:
+            if VAL[PossibiliTria[i]] == EMPTY:
                 PosSvolgiTria.append(PossibiliTria[i])
-            if Valpos[PossibiliTria[i+1]] == EMPTY:
+            if VAL[PossibiliTria[i+1]] == EMPTY:
                 PosSvolgiTria.append(PossibiliTria[i+1])
-            if Valpos[PossibiliTria[i+2]] == EMPTY:
+            if VAL[PossibiliTria[i+2]] == EMPTY:
                 PosSvolgiTria.append(PossibiliTria[i+2])
     if not Controllo:
         for i in range(0, 48, 3):
-            if (Valpos[PossibiliTria[i]] +
-                Valpos[PossibiliTria[i+1]] +
-                Valpos[PossibiliTria[i+2]]) == 30:
+            if (VAL[PossibiliTria[i]] +
+                VAL[PossibiliTria[i+1]] +
+                VAL[PossibiliTria[i+2]]) == 30:
                 if (ValposOld[PossibiliTria[i]] +
                     ValposOld[PossibiliTria[i+1]] +
                     ValposOld[PossibiliTria[i+2]]) != 30:
@@ -356,18 +356,18 @@ def ControlloAttacco():
     "Controllo possibili mosse fortunate"
     global Priorita
     for i in range(0, 23):
-        if Valpos[i] == EMPTY:
-            Valpos[i] = ROBOT
+        if VAL[i] == EMPTY:
+            VAL[i] = ROBOT
             FPossibiliTria()
             Priorita = 0
-            Valpos[i] = EMPTY
+            VAL[i] = EMPTY
             if len(PosSvolgiTria) > 1:
                 fromto(0, 0, scivoloPalline[0], scivoloPalline[1])
                 catch()
                 fromto(scivoloPalline[0], scivoloPalline[1], Xpos[i], Ypos[i])
                 release()
                 Priorita = 3
-                Valpos[i] = ROBOT
+                VAL[i] = ROBOT
                 break
 
 
@@ -378,7 +378,7 @@ def Attacco():
     if AttaccoState == 0:
         Strategia()
     else:
-        Valpos[p[0]] = ROBOT
+        VAL[p[0]] = ROBOT
         FPossibiliTria()
         if PosSvolgiTria > 1:
             fromto(0, 0, scivoloPalline[0], scivoloPalline[1])
@@ -388,7 +388,7 @@ def Attacco():
             release()
             AttaccoState = 0
         else:
-            Valpos[p[0]] = EMPTY
+            VAL[p[0]] = EMPTY
             AttaccoState = 0
             Strategia()
 
@@ -400,7 +400,7 @@ def BloccoTriaU():
     fromto(scivoloPalline[0], scivoloPalline[1],
            Xpos[PosBloccoTriaU[0]], Ypos[PosBloccoTriaU[0]])
     release()
-    Valpos[PosBloccoTriaU[0]] = ROBOT
+    VAL[PosBloccoTriaU[0]] = ROBOT
 
 
 def SvolgiTria():
@@ -410,7 +410,7 @@ def SvolgiTria():
     fromto(scivoloPalline[0], scivoloPalline[1],
            Xpos[PosSvolgiTria[0]], Ypos[PosSvolgiTria[0]])
     release()
-    Valpos[PosSvolgiTria[0]] = ROBOT
+    VAL[PosSvolgiTria[0]] = ROBOT
 
 
 def Controlli():
@@ -423,7 +423,7 @@ def Controlli():
     if LenPNU == 0 or LenPNU > 1:
         while LenPNU > 1:
             for i in range(0, LenPNU):
-                Valpos[PosPallineNuoveU[i-1]] = EMPTY
+                VAL[PosPallineNuoveU[i-1]] = EMPTY
             print("""\
             MOSSA UTENTE NON VALIDA!!!
             SONO STATE POSIZIONATE PIU' PALLINE!!!
@@ -444,7 +444,7 @@ def Controlli():
             LenPNU = len(PosPallineNuoveU)
     while not stop:
         stop = True
-        for i1, i2 in zip(ValposOld, Valpos):
+        for i1, i2 in zip(ValposOld, VAL):
             ContatorePos = ContatorePos+1
             if i1 == 10 or i1 == 1:
                 if i2 == 0:
@@ -468,11 +468,11 @@ def ControlloDifesa():
     global Controllo
     Controllo = True
     for i in range(0, 23):
-        if Valpos[i] == EMPTY:
-            Valpos[i] = USER
+        if VAL[i] == EMPTY:
+            VAL[i] = USER
             FPossibiliTria()
             Priorita = 0
-            Valpos[i] = EMPTY
+            VAL[i] = EMPTY
             if len(PosBloccoTriaU) > 1:
                 print(i)
                 Priorita = 1
@@ -480,13 +480,13 @@ def ControlloDifesa():
                 break
     if Priorita != 1:
         for i in range(0, 12):
-            if Valpos[angoli[i]] == USER:
+            if VAL[angoli[i]] == USER:
                 if angoli[i] in [0, 3, 6, 21, 18, 15]:
-                    if Valpos[angoli[i+3]] == EMPTY:
+                    if VAL[angoli[i+3]] == EMPTY:
                         Priorita = 1
                         PosDifesa = angoli[i+3]
                 elif angoli[i] in [23, 20, 17, 2, 5, 8]:
-                    if Valpos[angoli[i-3]] == EMPTY:
+                    if VAL[angoli[i-3]] == EMPTY:
                         Priorita = 1
                         PosDifesa = angoli[i-3]
     Controllo = False
@@ -499,7 +499,7 @@ def Difesa():
     fromto(scivoloPalline[0], scivoloPalline[1],
            Xpos[PosDifesa], Ypos[PosDifesa])
     release()
-    Valpos[PosDifesa] = ROBOT
+    VAL[PosDifesa] = ROBOT
 
 
 def TogliPallina():
@@ -512,10 +512,10 @@ def TogliPallina():
         fromto(Xpos[PosTogliPallina], Ypos[PosTogliPallina],
                contenitorePVR[0], contenitorePVR[1])
         release()
-        Valpos[PosTogliPallina] = EMPTY
+        VAL[PosTogliPallina] = EMPTY
     else:
         contatore = -1
-        for i in Valpos:
+        for i in VAL:
             contatore += 1
             if i == 10:
                 fromto(CurrentX, CurrentY, Xpos[contatore], Ypos[contatore])
@@ -523,7 +523,7 @@ def TogliPallina():
                 fromto(Xpos[contatore], Ypos[contatore],
                        contenitorePVR[0], contenitorePVR[1])
                 release()
-                Valpos[contatore] = EMPTY
+                VAL[contatore] = EMPTY
                 return
 
 #-----INIZIO PROGRAMMA------------------------------------------------

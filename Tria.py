@@ -286,7 +286,7 @@ def Strategia():
         for i in quadrati:
             for j in collegamenti:
                 if VAL[i] == EMPTY and VAL[j] == EMPTY:
-                    if j != V[0] and j != V[1] and j != V[2] and j != V[3]:
+                    if j not in V:
                         VAL[i] = ROBOT
                         VAL[j] = ROBOT
                         FPossibiliTria()
